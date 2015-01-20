@@ -1,11 +1,9 @@
 #include "stdafx.h"
-#include "SFML/OpenGL.hpp"
 #include "Terrain.h"
-#include <cmath>
 
-Terrain::Terrain(void)
+Terrain::Terrain(void) : index("index.txt")
 {
-	gridWidth=100;
+	gridWidth=100; //squares in grid
 	gridDepth=100;
 
 	terrWidth=50; //size of terrain in world units
@@ -15,11 +13,10 @@ Terrain::Terrain(void)
 	
 	//num squares in grid will be width*height, two triangles per square
 	//3 verts per triangle
-	 numVerts=gridDepth*gridWidth*2*3;
+	 numVerts=gridDepth * gridWidth * 2 * 3;
 
 
 }
-
 
 Terrain::~Terrain(void)
 {
@@ -29,15 +26,14 @@ Terrain::~Terrain(void)
 
 //interpolate between two values
 float lerp(float start, float end, float t){
-	return start+(end-start)*t;
+	return start + (end-start) * t;
 }
 
+void Terrain::setPoint(vector3 v,float x, float y, float z){
 
-void Terrain::setPoint(vector v,float x, float y, float z){
-
-		v[0]=x;
-		v[1]=y;
-		v[2]=z;
+		v[0] = x;
+		v[1] = y;
+		v[2] = z;
 }
 
 //helper function to calculate height of terrain at a given point in space
@@ -45,26 +41,49 @@ void Terrain::setPoint(vector v,float x, float y, float z){
 float  Terrain::getHeight(float x, float y){
 
 	//for the sample we will calculate height based on distance form origin
-	float dist=sqrt(x*x+y*y);
+	float dist= sqrt(x * x + y * y);
 
 	//center will be the highest point
-	dist=30-dist;
+	dist = 30 - dist;
 	//put a nice curve in it
-	dist*=dist;
-	dist*=dist;
+	dist *= dist;
+	dist *= dist;
 	//whoah, way to high, make it smaller
-	dist/=50000;
+	dist /= 50000;
 
 	return dist;
+}
+
+void Terrain::LoadImages(string indexfile)
+{
+	std::cout << "Loading images" << endl;
+	string c;
+	std::ifstream myfile;
+
+	sf::Texture temp;
+	
+	myfile.open(basepath + indexfile);
+	while (myfile >> c) 
+	{
+		if (!temp.loadFromFile(basepath + c))
+		{
+			textures.push_back(temp);
+			continue;
+		}
+		std::cout << "Loaded: " << c << endl;
+		textures.push_back(temp);
+	}
+	myfile.close();
 }
 
 void Terrain::Init(){
 	
 	delete [] vertices;//just in case we've called init before
-	vertices=new vector[numVerts];
+	vertices=new vector3[numVerts];
 	delete [] colors;
-	colors=new vector[numVerts];
+	colors=new vector3[numVerts];
 
+	LoadImages(index);
 
 	//interpolate along the edges to generate interior points
 	for(int i=0;i<gridWidth-1;i++){ //iterate left to right
@@ -90,8 +109,6 @@ void Terrain::Init(){
 			setPoint(colors[vertexNum],(rand()%255)/255.0,(rand()%255)/255.0,(rand()%255)/255.0);
 			setPoint(vertices[vertexNum++],left,getHeight(left,front),front);
 
-
-
 			setPoint(colors[vertexNum],(rand()%255)/255.0,(rand()%255)/255.0,(rand()%255)/255.0);
 			setPoint(vertices[vertexNum++],right,getHeight(right,front),front);
 
@@ -116,10 +133,6 @@ void Terrain::Init(){
 			setPoint(colors[vertexNum],(rand()%255)/255.0,(rand()%255)/255.0,(rand()%255)/255.0);
 			//setPoint(vertices[vertexNum++],0,0,0);
 			setPoint(vertices[vertexNum++],left,getHeight(left,front),front);
-
-
-
-
 		}
 	}
 
@@ -127,7 +140,6 @@ void Terrain::Init(){
 
 
 }
-
 
 void Terrain::Draw(){
 

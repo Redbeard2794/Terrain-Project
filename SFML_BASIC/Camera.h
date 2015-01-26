@@ -62,28 +62,30 @@ public:
             }
 	
 	}
-    void MoveLeftRight(int dir){ //Dir=+1=>Right, dir=-1=> Left
-            //TODO
-		
-    }
+	void MoveLeftRight(int dir){ //Dir=+1=>Right, dir=-1=> Left
+		//TODO
+		position.x += (forwardSpeed*dir);
+	}
 
 	void MoveUpDown(int dir){ //Dir=+1=>Right, dir=-1=> Left
-            //TODO
-		position.y+=(up.y*(forwardSpeed*dir));
-    }
- 
-    void MoveForwardBack(int dir){ //Dir=+1=>Forward, dir=-1=> Back
- 
-        position+=(forward*(forwardSpeed*dir));
-    }
- 
-    void TurnRightLeft(int dir){ //Dir=+1=>Right, dir=-1=> Left
-        //TODO
-    }
-         
-    void TurnUpDown(int dir){ //Dir=+1=>Up, dir=-1=> Down
-        //TODO
-    }
+		//TODO
+		position.y += (up.y*(forwardSpeed*dir));
+	}
+
+	void MoveForwardBack(int dir){ //Dir=+1=>Forward, dir=-1=> Back
+
+		position += (forward*(forwardSpeed*dir));
+	}
+
+	void TurnRightLeft(int dir){ //Dir=+1=>Right, dir=-1=> Left
+		//TODO
+
+	}
+
+	void TurnUpDown(int dir){ //Dir=+1=>Up, dir=-1=> Down
+		//TODO
+
+	}
  
     void ViewingTransform(){
         gluLookAt(	position.x,position.y,position.z,// camera position

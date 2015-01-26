@@ -1,1 +1,2 @@
 10map.png
+200SphereMap.png

@@ -88,8 +88,8 @@ int main()
 
 		//UPDATE
 		//update the camera
-		//camera.Update(Event); OLD
 		camera.CheckInputKB(keyboard);
+		terrain.checkInputKB(keyboard);
            
 		//DRAW
         //Prepare for drawing 

@@ -90,44 +90,6 @@ public:
 
 	}
 
-	void Update(sf::Event e){//respond to keyboard events
-		if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::D)){
-                MoveLeftRight(+1);
-            }
-
-			if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::A)){
-                MoveLeftRight(-1);
-            }
- 
-            if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::W)){
-                MoveForwardBack(1);
-            }
-            if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::S)){
-                MoveForwardBack(-1);
-            }
-
-			if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Q)){
-                MoveUpDown(1);
-            }
-            if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::E)){
-                MoveUpDown(-1);
-            }
- 
-            if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Right)){
-                TurnLeftRight(1);
-            }
-            if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Left)){
-                TurnLeftRight(-1);
-            }
-            if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Up)){
-               TurnUpDown(1);
-            }
-            if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Down)){
-                TurnUpDown(-1);
- 
-            }
-	
-	}
 	void MoveLeftRight(int dir){ //Dir=+1=>Right, dir=-1=> Left
 		//TODO
 		position.x += (forwardSpeed*dir);

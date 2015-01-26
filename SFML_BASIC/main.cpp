@@ -21,14 +21,13 @@
 #include "SFML/Graphics.hpp" 
 #include "SFML/Graphics/Shader.hpp"
 #include "SFML/OpenGL.hpp" 
-#include <iostream> 
-  
+#include <iostream>
  
 #include "Terrain.h"
 #include "Camera.h"
 
-
-
+const sf::Mouse mouse;
+const sf::Keyboard keyboard;
 
 int main() 
 { 
@@ -89,7 +88,8 @@ int main()
 
 		//UPDATE
 		//update the camera
-		camera.Update(Event);
+		//camera.Update(Event); OLD
+		camera.CheckInputKB(keyboard);
            
 		//DRAW
         //Prepare for drawing 

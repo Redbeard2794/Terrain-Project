@@ -24,6 +24,70 @@ public:
          
     }
  
+	void CheckInputKB(sf::Keyboard k)
+	{
+		//W : Move forward
+		if (k.isKeyPressed(k.W))
+		{
+			MoveForwardBack(+1);
+		}
+
+		//A : Move left
+		if (k.isKeyPressed(k.A))
+		{
+			MoveLeftRight(-1);
+		}
+
+		//S : Move backward
+		if (k.isKeyPressed(k.S))
+		{
+			MoveForwardBack(-1);
+		}
+
+		//D : Move right
+		if (k.isKeyPressed(k.D))
+		{
+			MoveLeftRight(+1);
+		}
+
+		//Q : Move up
+		if (k.isKeyPressed(k.Q))
+		{
+			MoveUpDown(+1);
+		}
+
+		//E : Move down
+		if (k.isKeyPressed(k.E))
+		{
+			MoveUpDown(-1);
+		}
+
+		//Up : Look up
+		if (k.isKeyPressed(k.Up))
+		{
+			TurnUpDown(+1);
+		}
+
+		//Left : Look left
+		if (k.isKeyPressed(k.Left))
+		{
+			TurnLeftRight(-1);
+		}
+
+		//Down : Look down
+		if (k.isKeyPressed(k.Down))
+		{
+			TurnUpDown(-1);
+		}
+
+		//Right : Look right
+		if (k.isKeyPressed(k.Right))
+		{
+			TurnLeftRight(+1);
+		}
+
+	}
+
 	void Update(sf::Event e){//respond to keyboard events
 		if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::D)){
                 MoveLeftRight(+1);
@@ -48,10 +112,10 @@ public:
             }
  
             if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Right)){
-                TurnRightLeft(1);
+                TurnLeftRight(1);
             }
             if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Left)){
-                TurnRightLeft(-1);
+                TurnLeftRight(-1);
             }
             if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Up)){
                TurnUpDown(1);
@@ -77,7 +141,7 @@ public:
 		position += (forward*(forwardSpeed*dir));
 	}
 
-	void TurnRightLeft(int dir){ //Dir=+1=>Right, dir=-1=> Left
+	void TurnLeftRight(int dir){ //Dir=+1=>Right, dir=-1=> Left
 		//TODO
 
 	}

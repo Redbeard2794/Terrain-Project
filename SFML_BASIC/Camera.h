@@ -11,6 +11,8 @@ public:
     aiVector3D position;
     aiVector3D forward;
     aiVector3D up;
+
+	aiVector3D look;//point that the camera will look at
  
     float forwardSpeed;
     float roationSpeed;
@@ -21,7 +23,7 @@ public:
         position=p;
         forward=f;
         up=u;
-         
+		look = aiVector3D(0, 0, 0);
     }
  
 	void CheckInputKB(sf::Keyboard k)
@@ -143,18 +145,19 @@ public:
 
 	void TurnLeftRight(int dir){ //Dir=+1=>Right, dir=-1=> Left
 		//TODO
-
+		forward.x += dir;//or look?
 	}
 
 	void TurnUpDown(int dir){ //Dir=+1=>Up, dir=-1=> Down
 		//TODO
-
+		forward.y += dir;//or look?
 	}
  
     void ViewingTransform(){
         gluLookAt(	position.x,position.y,position.z,// camera position
-					forward.x,forward.y,forward.z, //look at this point //TODO: BUG here!! what is it ??
+			forward.x, forward.y, forward.z, //look at this point //TODO: BUG here!! what is it ??
 					0,1,0); //camera up
+		//cout << forward.x << forward.y << forward.z << endl;
     }
  
 };
